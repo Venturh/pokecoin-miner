@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import {UsersApi, RegisterBody, LoginBody} from './server'
 import './App.css';
+import Login from './components/Startpage/Login';
 
 function App() {
+  const usersAPI = new UsersApi();
+  
+  usersAPI.apiClient.authentications.token.apiKey = '<insert api token here>'
+//  const register = new RegisterBody("mwerp001", "hallo");
+//  usersAPI.authRegisterPost(register)
+    const loginbody = new LoginBody("mwerp001", "hallo");
+    const login = usersAPI.authLoginPost(loginbody);
+    console.log(login);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login></Login>
+
     </div>
   );
 }
