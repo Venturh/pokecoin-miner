@@ -1,22 +1,23 @@
 import React from 'react';
-import {UsersApi, RegisterBody, LoginBody} from './server'
+import { Provider } from 'react-redux';
 import './App.css';
+import { createStore } from 'redux';
+
+import reducer from './reducers/index';
 import Login from './components/Startpage/Login';
 
-function App() {
-  const usersAPI = new UsersApi();
-  
-  usersAPI.apiClient.authentications.token.apiKey = '<insert api token here>'
-//  const register = new RegisterBody("mwerp001", "hallo");
-//  usersAPI.authRegisterPost(register)
-    const loginbody = new LoginBody("mwerp001", "hallo");
-    const login = usersAPI.authLoginPost(loginbody);
-    console.log(login);
-  return (
-    <div className="App">
-      <Login></Login>
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  );
 
-    </div>
+function App() {
+  return (
+    <Provider store={store}>
+      <div className="App">
+        <Login />
+      </div>
+    </Provider>
   );
 }
 
