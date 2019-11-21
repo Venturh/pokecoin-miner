@@ -1,23 +1,29 @@
 import { userConstants } from "../constants/UserConstants"
 import { UsersApi, RegisterBody, LoginBody, ResponseBody } from "../server/"
- 
 const usersAPI = new UsersApi();
 
 
-  function login(username, password){
+
+
+function login(username, password) {
+  return dispatch => {
+    dispatch(request());
 
     usersAPI.authLoginPost(new LoginBody(username, password))
-    .then(function(token) {
-      console.log("LoginLog ", token);
+    .then(function(response) {
+      console.log("LoginLog ", response);
+
+      dispatch(success(username, response.token));
     })
     .catch(function(error){
-      console.log("ErrorLog ", error);
+      dispatch(failure(error.body.message));
 
     })
+  };
 
-    return {
-      type: userConstants.LOGIN_REQUEST,
-    }
+  function request() { return { type: userConstants.LOGIN_REQUEST } }
+  function success(username, token) { return { type: userConstants.LOGIN_SUCCESS, username, token } }
+  function failure(error) { return { type: userConstants.LOGIN_FAILED, error } }
 }
 
 

@@ -1,19 +1,12 @@
-import { userConstants } from "../constants/UserConstants";
+import { combineReducers } from 'redux';
 
-const initialState = {};
+import { message } from './MessageReducer'
+import { user } from './UserReducer'
 
-const authentication = (state = initialState, action) => {
-  switch (action.type) {
-    case userConstants.LOGIN_REQUEST:
-      return (
-        {
-            auth: action.authentication
 
-        }
-      );
-    default:
-      return state;
-  }
-}
+const rootReducer = combineReducers({
+  message,
+  user
+});
 
-export default authentication;
+export default rootReducer;
