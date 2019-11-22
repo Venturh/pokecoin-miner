@@ -11,7 +11,8 @@ class Login extends Component{
             password: '',
         };
         this.handleChange = this.handleChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmitLogin = this.onSubmitLogin.bind(this);
+        this.onSubmitRegister = this.onSubmitRegister.bind(this);
 
     }
 
@@ -20,26 +21,31 @@ class Login extends Component{
         this.setState({ [name]: value });
     }
 
-    onSubmit(e) {
+    onSubmitLogin(e) {
       
         e.preventDefault();
-        const { history } = this.props;
         const { username, password } = this.state;
         this.props.login(username, password);
     }
+
+    onSubmitRegister(e) {
+      
+      e.preventDefault();
+      const { username, password } = this.state;
+      this.props.register(username, password);
+  }
 
       render() {
         const { username, password } = this.state;
         return (
           <div>
-            <form onSubmit={this.onSubmit}>
+            <form>
               
               <p>{this.props.message.error}</p>
-                        
-              
               <input type="text" name="username" value={username} onChange={this.handleChange}/>
               <input type="text" name="password" value={password} onChange={this.handleChange}/>
-              <button type="submit">OK</button>
+              <button type="submit" onClick={this.onSubmitLogin}>Login</button>
+              <button type="submit" onClick={this.onSubmitRegister}>Register</button>
               <div>
               <p></p>
               {this.props.message.request &&
@@ -58,7 +64,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-  login: userActions.login
+  login: userActions.login, 
+  register: userActions.register
 };
 
 export default connect(mapState, actionCreators

@@ -18,7 +18,7 @@ class Start extends Component{
     render(){
         return(
             <div>
-                <h1>Willkomen </h1>
+                <h1>Willkomen {this.props.user.username}</h1>
             </div>
         )
     }

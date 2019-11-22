@@ -5,8 +5,13 @@ export function user(state = {}, action){
         case userConstants.LOGIN_SUCCESS:
             return{
                 type: 'login-succes',
-                user: action.user,
+                username: action.username,
                 token: action.token
+            }
+        case userConstants.REGISTER_SUCCESS:
+            return{
+                type: 'register-succes',
+                username: action.username
             }
         default:
             return state;

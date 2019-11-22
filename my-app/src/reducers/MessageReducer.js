@@ -13,12 +13,12 @@ export function message(state = {}, action){
                 type: 'login-request',
                 request: "true"
             }
-        case userConstants.LOGIN_SUCCESS:
+        case userConstants.REGISTER_FAILED:
             return{
-                type: 'login-succes',
-                user: action.user,
-                token: action.token
+                type: 'register-failed',
+                error: action.error
             }
+
         default:
             return state;
     }

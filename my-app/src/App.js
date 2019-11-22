@@ -4,7 +4,7 @@ import './App.css';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Link,
@@ -12,7 +12,7 @@ import {
   useHistory,
   useLocation
 } from "react-router-dom";
-
+import { history } from './constants/History'
 import reducer from './reducers/index';
 import Login from './components/Startpage/Login';
 import Start from './components/Main/Start';
@@ -27,10 +27,11 @@ const store = createStore(
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Login />
-        </div>
+      <Router  history={history}>
+        <Switch>
+          <Route path="/login" component={Login}/>
+          <Route path="/start" component={Start}/>
+        </Switch>
       </Router>
 
     </Provider>
