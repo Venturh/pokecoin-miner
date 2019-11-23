@@ -16,6 +16,7 @@ import { history } from './constants/History'
 import reducer from './reducers/index';
 import Login from './components/Startpage/Login';
 import Start from './components/Main/Start';
+import Mine from './components/Main/Mine';
 
 const store = createStore(
   reducer,
@@ -31,6 +32,8 @@ function App() {
         <Switch>
           <Route path="/login" component={Login}/>
           <Route path="/start" component={Start}/>
+          <Route path="/mine" component={Mine}/>
+          
         </Switch>
       </Router>
 

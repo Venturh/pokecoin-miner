@@ -1,7 +1,10 @@
 import { userConstants } from "../constants/UserConstants"
-import { UsersApi, RegisterBody, LoginBody, ResponseBody } from "../server/"
+import { UsersApi, RegisterBody, LoginBody } from "../server/"
 import { history } from '../constants/History'
+import { cookies } from '../constants/Cookie'
+
 const usersAPI = new UsersApi();
+
 
 function login(username, password) {
   return dispatch => {
@@ -10,11 +13,15 @@ function login(username, password) {
     usersAPI.authLoginPost(new LoginBody(username, password))
     .then(function(response) {
       console.log("LoginLog ", response);
-      history.push("/start");
+      cookies.set('username', username, { path: '/' });
       dispatch(login_success(username, response.token));
+      history.push("/start");
     })
     .catch(function(error){
       console.log("Eroor ", error);
+      if(username || password == null){
+        dispatch(login_failure("Username or Password empty"));
+      }
       dispatch(login_failure(error.body.message));
 
     })
@@ -29,8 +36,7 @@ function login(username, password) {
 function register(username, password) {
   return dispatch => {
     dispatch(request());
-    
-
+  
     usersAPI.authRegisterPost(new RegisterBody(username, password))
     .then(function(response) {
       console.log("LoginLog ", response);
@@ -48,10 +54,19 @@ function register(username, password) {
   function failure(error) { return { type: userConstants.REGISTER_FAILED, error } }
 }
 
+function logout() {
+  return dispatch => {
+    cookies.remove('username', { path: '/' });
+    history.push("/login");
+
+  };
+}
+
 
 export const userActions = {
   login,
   register,
+  logout,
 };
 
 

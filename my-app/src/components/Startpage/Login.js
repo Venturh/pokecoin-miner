@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import './login.css';
 import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+
+
 import { userActions } from '../../actions/UserAction';
+import { cookies } from '../../constants/Cookie';
 
 class Login extends Component{
     constructor(props){
@@ -37,22 +43,36 @@ class Login extends Component{
 
       render() {
         const { username, password } = this.state;
+        const alert = this.props.message.error
         return (
-          <div>
-            <form>
-              
-              <p>{this.props.message.error}</p>
-              <input type="text" name="username" value={username} onChange={this.handleChange}/>
-              <input type="text" name="password" value={password} onChange={this.handleChange}/>
-              <button type="submit" onClick={this.onSubmitLogin}>Login</button>
-              <button type="submit" onClick={this.onSubmitRegister}>Register</button>
-              <div>
-              <p></p>
-              {this.props.message.request &&
-                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-              }
-              </div>
-            </form>
+
+          <div className="login">
+          <h1>Pokecoin</h1>
+  
+            <Form className="login_form">
+              <FormGroup>
+                  <Label>Username</Label>
+                  <Input name="username" value={username} onChange={this.handleChange}></Input>
+              </FormGroup>
+
+              <FormGroup>
+                  <Label>Password</Label>
+                  <Input type="password" name="password" value={password} onChange={this.handleChange} ></Input>
+              </FormGroup>
+
+              <FormGroup>
+                <Button color="primary" size="lg" block onClick={this.onSubmitLogin}>Login</Button>
+                <Button color="info" size="lg" block onClick={this.onSubmitRegister}>Register</Button>
+               </FormGroup>
+
+               <div className="alert">
+             { alert && 
+             <Alert color="danger">
+                {this.props.message.error}
+              </Alert> }
+            </div>
+            </Form>
+    
         </div>
         );
       }
@@ -68,6 +88,4 @@ const actionCreators = {
   register: userActions.register
 };
 
-export default connect(mapState, actionCreators
-
-  )(Login);
+export default connect(mapState, actionCreators)(Login);
