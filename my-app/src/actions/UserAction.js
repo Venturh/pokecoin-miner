@@ -14,6 +14,7 @@ function login(username, password) {
     .then(function(response) {
       console.log("LoginLog ", response);
       cookies.set('username', username, { path: '/' });
+      cookies.set('token', response.token, { path: '/' });
       dispatch(login_request(null));
       dispatch(login_success(username, response.token));
       history.push("/start");

@@ -2,31 +2,37 @@ import { BlockchainApi } from "../server";
 import { blockchainConstants } from "../constants/BlockchainConstants";
 
 const blockchainApi = new BlockchainApi();
-function getLastBlock(){
+function blockrequest(){
     return dispatch => {
-        blockchainApi.blockchainLastBlockGet()
-        .then(function(response){
-            console.log("Blockchain ", response.hash);
-        })
+        dispatch(blogchain_request(true));
+        function blogchain_request(loading) { return { type: blockchainConstants.BLOCKCHAIN_REQUEST, loading } 
+        }
     }
-
 }
 
-function mine(){
+function mine(addBlockBody){
     return dispatch => {
-        blockchainApi.blockchainLastBlockGet().
-        then(function(response){
-            console.log("Blockchain ", response.hash);
-            dispatch(getLastBlock_succes(response.hash))
+        
+
+        console.log("addblock", addBlockBody);
+        blockchainApi.blockchainBlocksPost(addBlockBody)
+        .then(function(test){
+            console.log("block erzeugen",test.body.message);
+            dispatch(blogchain_succes(true))
+            dispatch(blogchain_request(false))
+        })
+           
+        .catch(function(error){
+            console.log("blockError", error)
+            dispatch(blogchain_request(false))
         })
     };
+    function blogchain_request(loading) { return { type: blockchainConstants.BLOCKCHAIN_REQUEST, loading } }
+    function blogchain_succes(succes) { return { type: blockchainConstants.GETLASTBLOCK_SUCCESS, succes} }
 
-    
-  function getLastBlock_succes(lastblock) { return { type: blockchainConstants.GETLASTBLOCK_SUCCESS, lastblock } }
 }
-
 export const blockchainActions = {
-    getLastBlock,
+    blockrequest,
     mine,
 
   };

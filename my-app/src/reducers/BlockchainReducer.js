@@ -3,10 +3,13 @@ import { blockchainConstants } from "../constants/BlockchainConstants";
 
 export function blockchain(state = {}, action){
     switch(action.type){
-        case blockchainConstants.GETLASTBLOCK_SUCCESS:
+        case blockchainConstants.BLOCKCHAIN_REQUEST:
             return{
-                type: 'getlastblock-succes',
-                prevhash: action.lastblock,
+                loading: action.loading,
+            }
+        case blockchainConstants.BLOCKCHAIN_SUCCESS:
+            return{
+                blockfound: action.succes,
             }
         default:
             return state;
