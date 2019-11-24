@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import './login.css';
 import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Alert, Spinner  } from 'reactstrap';
 
 
 import { userActions } from '../../actions/UserAction';
-import { cookies } from '../../constants/Cookie';
 
 class Login extends Component{
     constructor(props){
@@ -44,12 +42,16 @@ class Login extends Component{
       render() {
         const { username, password } = this.state;
         const alert = this.props.message.error
+        let login_loading = this.props.message.login_request
+        let register_loading = this.props.message.register_request
         return (
 
-          <div className="login">
-          <h1>Pokecoin</h1>
-  
-            <Form className="login_form">
+          <div className="d-flex justify-content-center" >
+
+            <Form>
+
+              <h1 className="display-1 text-center">Pokecoin</h1>
+
               <FormGroup>
                   <Label>Username</Label>
                   <Input name="username" value={username} onChange={this.handleChange}></Input>
@@ -61,16 +63,27 @@ class Login extends Component{
               </FormGroup>
 
               <FormGroup>
-                <Button color="primary" size="lg" block onClick={this.onSubmitLogin}>Login</Button>
-                <Button color="info" size="lg" block onClick={this.onSubmitRegister}>Register</Button>
+                <Button color="primary" size="lg" block onClick={this.onSubmitLogin}>
+                {login_loading && 
+                  <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
+                    Login
+                </Button>
+
+                <Button color="info" size="lg" block onClick={this.onSubmitRegister}>
+                {register_loading &&
+                  <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
+                    Register
+                </Button>
                </FormGroup>
 
-               <div className="alert">
-             { alert && 
-             <Alert color="danger">
-                {this.props.message.error}
-              </Alert> }
-            </div>
+               
+
+              <div>
+              { alert && 
+              <Alert color="danger">
+                  {this.props.message.error}
+                </Alert> }
+             </div>
             </Form>
     
         </div>

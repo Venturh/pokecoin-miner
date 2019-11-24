@@ -8,10 +8,14 @@ export function message(state = {}, action){
                 error: action.error
             };
         case userConstants.LOGIN_REQUEST:
-            
             return {
                 type: 'login-request',
-                request: "true"
+                login_request: action.loading
+            };
+        case userConstants.REGISTER_REQUEST:
+            return {
+                type: 'register-request',
+                register_request: action.loading
             }
         case userConstants.REGISTER_FAILED:
             return{

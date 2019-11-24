@@ -8,12 +8,13 @@ const usersAPI = new UsersApi();
 
 function login(username, password) {
   return dispatch => {
-    dispatch(login_request());
+    dispatch(login_request("true"));
 
     usersAPI.authLoginPost(new LoginBody(username, password))
     .then(function(response) {
       console.log("LoginLog ", response);
       cookies.set('username', username, { path: '/' });
+      dispatch(login_request(null));
       dispatch(login_success(username, response.token));
       history.push("/start");
     })
@@ -22,12 +23,13 @@ function login(username, password) {
       if(username || password == null){
         dispatch(login_failure("Username or Password empty"));
       }
+      dispatch(login_request(null));
       dispatch(login_failure(error.body.message));
 
     })
   };
 
-  function login_request() { return { type: userConstants.LOGIN_REQUEST } }
+  function login_request(loading) { return { type: userConstants.LOGIN_REQUEST, loading } }
   function login_success(username, token) { return { type: userConstants.LOGIN_SUCCESS, username, token } }
   function login_failure(error) { return { type: userConstants.LOGIN_FAILED, error } }
 }
@@ -35,11 +37,12 @@ function login(username, password) {
 
 function register(username, password) {
   return dispatch => {
-    dispatch(request());
+    dispatch(request("true"));
   
     usersAPI.authRegisterPost(new RegisterBody(username, password))
     .then(function(response) {
       console.log("LoginLog ", response);
+      dispatch(request(null));
       dispatch(login(username, password));
 
     })
@@ -50,7 +53,7 @@ function register(username, password) {
     })
   };
 
-  function request() { return { type: userConstants.LOGIN_REQUEST } }
+  function request(loading) { return { type: userConstants.REGISTER_REQUEST, loading } }
   function failure(error) { return { type: userConstants.REGISTER_FAILED, error } }
 }
 

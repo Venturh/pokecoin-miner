@@ -16,7 +16,6 @@ import {
     DropdownItem,
     NavbarText
   } from 'reactstrap';
-import './navigationbar.css'
 import { userActions } from '../../actions/UserAction';
 
 class NavigationBar extends Component{
