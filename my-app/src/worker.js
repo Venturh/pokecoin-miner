@@ -1,9 +1,11 @@
 import crypto from 'crypto'
+
+
 export const calculatePrimes = (prevhash, timestamp, data, nonce) => {
   let i = 0;
-  while(i<9999999)  {
+  while(true)  {
       nonce+=1;
-      timestamp+=1
+      //timestamp+=1
 
       const information = (
         prevhash +

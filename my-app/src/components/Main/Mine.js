@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, Alert, Spinner  } from 'reactstrap';
 
 
+
 import NavigationBar from './NavigationBar';
 import { blockchainActions } from '../../actions/BlockchainAction';
 import { BlockchainApi, AddBlockBody, UsersApi } from '../../server';
@@ -21,16 +22,26 @@ class Mine extends Component{
             data:'',
             timestamp: Math.floor(Date.now() / 1000),
             nonce: 0,
-            mining: true
+            mining: true,
+            visibility: true
 
         };
         this.usersAPI = new UsersApi();
         this.blockchainApi = new BlockchainApi();
         this.usersAPI.apiClient.authentications.token.apiKey = cookies.get('token');
-        this.workerInstance = worker()
+        this.workerInstance = worker();
         this.mine = this.mine.bind(this);
         this.stopMine = this.stopMine.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.checkActiveTab = this.checkActiveTab.bind(this);
+        document.addEventListener('visibilitychange', this.checkActiveTab);
+    }
+
+    checkActiveTab(){
+        if (document.visibilityState === 'hidden') {
+            document.title = '😴';
+            this.stopMine();
+          }
     }
 
     handleChange(e) {
@@ -38,25 +49,15 @@ class Mine extends Component{
         this.setState({ data: value });
     }
 
-
-    getlatestBlock(){
-        this.props.getLastBlock();
-
-    }
-
     sendBlock(timestamp, data){
         this.setState({timestamp: timestamp, nonce:data });
         const addBlockBody = new AddBlockBody(this.state.prevHash, this.state.data, this.state.timestamp, this.state.nonce)
-
         console.log("bla", this.state)
-
         this.props.blocks(addBlockBody);
-        
-
     }
 
-
     mine(){
+        this.workerInstance = worker();
         this.props.blockrequest();
         
         this.blockchainApi.blockchainLastBlockGet().then(function(response){
@@ -77,23 +78,15 @@ class Mine extends Component{
             } else {
                 console.log("fertig nichts gefunden")
             }
-            
-            
-
-          })
-          
-
-
-
-
-
-
-        
-
-        
+          })   
     }
+
+
     stopMine(){
-        this.setState({ mining: false})
+        this.setState({ mining: false});
+        console.log("Stopped mining");
+        this.workerInstance.terminate();
+        this.props.stop();
     }
 
     render(){
@@ -120,12 +113,14 @@ class Mine extends Component{
                          <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
                             Mine
                             </Button>
+                        <Button color="primary" size="lg" block onClick={this.stopMine}>Stop</Button>
                     </FormGroup>
+                    <div>
+                        {this.props.blockchain.blockfound && <p>You found a PokeCoin! Press mine again</p>}
+                    </div>
                 </Form>
 
-                <div>
-                {this.props.blockchain.blockfound && <p>You found a PokeCoin!</p>}
-                </div>
+
                 
                 
                 </div>
@@ -140,7 +135,8 @@ function mapState(state) {
   
   const actionCreators = {
     blockrequest: blockchainActions.blockrequest,
-      blocks: blockchainActions.mine,
+    blocks: blockchainActions.mine,
+    stop: blockchainActions.stop,
     
   };
   

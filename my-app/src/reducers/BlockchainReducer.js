@@ -8,6 +8,7 @@ export function blockchain(state = {}, action){
                 loading: action.loading,
             }
         case blockchainConstants.BLOCKCHAIN_SUCCESS:
+            console.log("Mining succes", action.succes)
             return{
                 blockfound: action.succes,
             }
