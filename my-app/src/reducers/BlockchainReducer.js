@@ -12,6 +12,11 @@ export function blockchain(state = {}, action){
             return{
                 blockfound: action.succes,
             }
+
+        case blockchainConstants.GETBALANCE_SUCCES:
+            return{
+                balance: action.balance,
+            }
         default:
             return state;
     }

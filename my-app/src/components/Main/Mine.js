@@ -37,6 +37,11 @@ class Mine extends Component{
         document.addEventListener('visibilitychange', this.checkActiveTab);
     }
 
+    componentWillUnmount() {
+        this.workerInstance.terminate();
+
+    }
+
     checkActiveTab(){
         if (document.visibilityState === 'hidden') {
             document.title = '😴';

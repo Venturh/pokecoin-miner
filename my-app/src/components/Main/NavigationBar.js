@@ -15,10 +15,13 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText
+    NavbarText,
+    Row,
+    Col,
   } from 'reactstrap';
 import { userActions } from '../../actions/UserAction';
 import { blockchainActions } from '../../actions/BlockchainAction';
+import Balance from '../Mining/Balance';
 
 class NavigationBar extends Component{
 
@@ -33,20 +36,31 @@ class NavigationBar extends Component{
     render(){
         return(
             <div>
-                <Navbar color="light" light expand="sm">
-
-                             <Nav className="ml-auto" navbar>
+                <Navbar color="primary" light expand="sm">
+                    <Row className="ml-auto">
+                        <Nav  navbar>
+                            <Col xs="auto"> 
                                 <NavItem>
-                                <NavLink tag={RRNavLink} exact to="/start">PokeCoin</NavLink>v 
+                                    <NavLink tag={RRNavLink} exact to="/start">PokeCoin</NavLink>
                                 </NavItem>
+                            </Col>
+                            <Col xs="auto">
                                 <NavItem>
                                     <NavLink tag={RRNavLink} exact to="/mine">Farm</NavLink>
                                 </NavItem>
+                            </Col>
+                            <Col xs="auto" >
                                 <NavItem>
-                                    <Button outline color="dark" onClick={this.props.logout, this.props.stopMine}>Logout</Button>
+                                    <NavLink><Balance/></NavLink>
+                                    </NavItem>
+                            </Col>
+                            <Col xs="auto">
+                                <NavItem>
+                                <Button outline color="dark" onClick={this.props.logout}>Logout</Button>
                                 </NavItem>
-                            </Nav>
-                        
+                            </Col>
+                        </Nav>
+                    </Row>  
                 </Navbar>
             </div>
         )
