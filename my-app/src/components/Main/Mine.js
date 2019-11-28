@@ -71,12 +71,19 @@ class Mine extends Component{
 
 
         this.workerInstance.addEventListener('message', (message) => {
-            
+            console.log(message);
             if(message.data.type != "RPC"){
-                console.log('New Message: ', message.data)
-                this.sendBlock(message.data[0], message.data[1]);
+                if(message.data.length == 2){
+                    console.log('New Message: ', message.data)
+                    this.setState({ nonce: message.data[0], timestamp: message.data[1]});
+
+                } else {
+                    console.log('New Message: ', message.data)
+                    this.sendBlock(message.data[0], message.data[1]);
+                }
+
             } else {
-                console.log("fertig nichts gefunden")
+                console.log("fertig nichts gefunden");
             }
           })   
     }
@@ -119,10 +126,6 @@ class Mine extends Component{
                         {this.props.blockchain.blockfound && <p>You found a PokeCoin! Press mine again</p>}
                     </div>
                 </Form>
-
-
-                
-                
                 </div>
             </div>
         )

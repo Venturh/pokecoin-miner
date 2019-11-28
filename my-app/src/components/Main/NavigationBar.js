@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Button,
@@ -17,6 +18,7 @@ import {
     NavbarText
   } from 'reactstrap';
 import { userActions } from '../../actions/UserAction';
+import { blockchainActions } from '../../actions/BlockchainAction';
 
 class NavigationBar extends Component{
 
@@ -34,12 +36,14 @@ class NavigationBar extends Component{
                 <Navbar color="light" light expand="sm">
 
                              <Nav className="ml-auto" navbar>
-                                <NavbarBrand href="/start">PokeCoin</NavbarBrand>
                                 <NavItem>
-                                    <NavLink href="/mine">Farm</NavLink>
+                                <NavLink tag={RRNavLink} exact to="/start">PokeCoin</NavLink>v 
                                 </NavItem>
                                 <NavItem>
-                                    <Button outline color="dark" onClick={this.props.logout}>Logout</Button>
+                                    <NavLink tag={RRNavLink} exact to="/mine">Farm</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <Button outline color="dark" onClick={this.props.logout, this.props.stopMine}>Logout</Button>
                                 </NavItem>
                             </Nav>
                         
@@ -55,6 +59,7 @@ function mapState(state) {
   
   const actionCreators = {
     logout: userActions.logout,
+    stopMine: blockchainActions.stop,
     
   };
   

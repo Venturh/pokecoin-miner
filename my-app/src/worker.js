@@ -4,7 +4,6 @@ import crypto from 'crypto'
 export const calculatePrimes = (prevhash, timestamp, data, nonce) => {
   let i = 0;
   while(true)  {
-      nonce+=1;
       //timestamp+=1
 
       const information = (
@@ -18,6 +17,10 @@ export const calculatePrimes = (prevhash, timestamp, data, nonce) => {
         postMessage([timestamp, nonce, hash]);
         return;
       }
+      if(i%100000 == 0){
+        postMessage([nonce, timestamp])
+      }
       i+=1;
+      nonce+=1;
     }
   }

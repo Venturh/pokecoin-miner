@@ -20,6 +20,7 @@ class Start extends Component{
             <div>
                 <NavigationBar/>
                 <h1>Willkomen {cookies.get('username')}</h1>
+                <h2>{this.props.user.username}</h2>
             </div>
         )
     }
