@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, FormGroup, Label, Input, Alert, Spinner  } from 'reactstrap';
 
 
-import { userActions } from '../../actions/UserAction';
+import { userActions } from '../actions/UserAction';
 
 class Login extends Component{
     constructor(props){

@@ -19,9 +19,9 @@ import {
     Row,
     Col,
   } from 'reactstrap';
-import { userActions } from '../../actions/UserAction';
-import { blockchainActions } from '../../actions/BlockchainAction';
-import Balance from '../Mining/Balance';
+import { userActions } from '../actions/UserAction';
+import { blockchainActions } from '../actions/BlockchainAction';
+import Balance from './Balance';
 
 class NavigationBar extends Component{
 
@@ -47,6 +47,11 @@ class NavigationBar extends Component{
                             <Col xs="auto">
                                 <NavItem>
                                     <NavLink tag={RRNavLink} exact to="/mine">Farm</NavLink>
+                                </NavItem>
+                            </Col>
+                            <Col xs="auto">
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} exact to="/cardpackages">CardPackages</NavLink>
                                 </NavItem>
                             </Col>
                             <Col xs="auto" >

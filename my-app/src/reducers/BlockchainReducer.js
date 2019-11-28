@@ -5,17 +5,14 @@ export function blockchain(state = {}, action){
     switch(action.type){
         case blockchainConstants.BLOCKCHAIN_REQUEST:
             return{
+                ...state,
                 loading: action.loading,
             }
         case blockchainConstants.BLOCKCHAIN_SUCCESS:
             console.log("Mining succes", action.succes)
             return{
+                ...state,
                 blockfound: action.succes,
-            }
-
-        case blockchainConstants.GETBALANCE_SUCCES:
-            return{
-                balance: action.balance,
             }
         default:
             return state;

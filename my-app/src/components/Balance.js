@@ -4,20 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Badge } from 'reactstrap';
 
-import { blockchainActions } from '../../actions/BlockchainAction';
-import { UsersApi } from '../../server';
-import { cookies } from '../../constants/Cookie';
+import { blockchainActions } from '../actions/BlockchainAction';
+import { UsersApi } from '../server';
+import { cookies } from '../constants/Cookie';
 
 
-import { userActions } from '../../actions/UserAction';
+import { userActions } from '../actions/UserAction';
 
 class Balance extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            username: '',
-            password: '',
+          
+
         };
         this.usersAPI = new UsersApi();
         this.usersAPI.apiClient.authentications.token.apiKey = cookies.get('token');
@@ -44,7 +44,7 @@ class Balance extends Component{
       render() {
         return (
           <div >
-            Coins:  <Badge color="info">{this.props.blockchain.balance }</Badge>
+            Coins:  <Badge color="info">{this.props.wallet.balance }</Badge>
           </div>
 
         );
@@ -52,8 +52,8 @@ class Balance extends Component{
 }
 
 function mapState(state) {
-  const { blockchain } = state;
-  return { blockchain  };
+  const { wallet } = state;
+  return { wallet  };
 }
 
 const actionCreators = {

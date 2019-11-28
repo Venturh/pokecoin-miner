@@ -1,8 +1,13 @@
 import crypto from 'crypto'
 
 
-export const calculatePrimes = (prevhash, timestamp, data, nonce) => {
+export const calculateBlock = (prevhash, timestamp, data, nonce, diff) => {
   let i = 0;
+  let difficulty = "";
+  for (let i = 0; i < diff; i++) {
+    difficulty += "0"
+    
+  }
   while(true)  {
       //timestamp+=1
 

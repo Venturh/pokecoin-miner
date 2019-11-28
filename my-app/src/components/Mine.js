@@ -5,11 +5,11 @@ import { Button, Form, FormGroup, Label, Input, Alert, Spinner  } from 'reactstr
 
 
 import NavigationBar from './NavigationBar';
-import { blockchainActions } from '../../actions/BlockchainAction';
-import { BlockchainApi, AddBlockBody, UsersApi } from '../../server';
-import { cookies } from '../../constants/Cookie';
+import { blockchainActions } from '../actions/BlockchainAction';
+import { BlockchainApi, AddBlockBody, UsersApi } from '../server';
+import { cookies } from '../constants/Cookie';
 
-import worker from 'workerize-loader!../../worker'; // eslint-disable-line import/no-webpack-loader-syntax
+import worker from 'workerize-loader!../worker'; // eslint-disable-line import/no-webpack-loader-syntax
 
 
 class Mine extends Component{
@@ -22,6 +22,7 @@ class Mine extends Component{
             data:'',
             timestamp: Math.floor(Date.now() / 1000),
             nonce: 0,
+            difficulty: 0,
             mining: true,
             visibility: true
 
@@ -67,21 +68,26 @@ class Mine extends Component{
         
         this.blockchainApi.blockchainLastBlockGet().then(function(response){
             this.setState({ prevHash: response.hash });
+            console.log("lastblock")
         }.bind(this))
-        .then(function(response){
-            console.log("Stare mining", this.state)
-        }.bind(this)).then(function(){
-            this.workerInstance.calculatePrimes(this.state.prevHash, this.state.timestamp, this.state.data, this.state.nonce)
+        .then(function(){
+            this.blockchainApi.blockchainCurrentDifficultyGet().then(function(diff){
+                this.setState({ difficulty: diff }); 
+                console.log("diff", this.state.difficulty)
+            }.bind(this))
+            .then(function(){
+                console.log("worker")
+                this.workerInstance.calculateBlock(this.state.prevHash, this.state.timestamp, this.state.data, this.state.nonce, this.state.difficulty)
+            }.bind(this))
         }.bind(this))
+
 
 
         this.workerInstance.addEventListener('message', (message) => {
-            console.log(message);
             if(message.data.type != "RPC"){
                 if(message.data.length == 2){
                     console.log('New Message: ', message.data)
                     this.setState({ nonce: message.data[0], timestamp: message.data[1]});
-
                 } else {
                     console.log('New Message: ', message.data)
                     this.sendBlock(message.data[0], message.data[1]);

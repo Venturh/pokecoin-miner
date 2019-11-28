@@ -14,9 +14,10 @@ import {
 } from "react-router-dom";
 import { history } from './constants/History'
 import reducer from './reducers/index';
-import Login from './components/Startpage/Login';
-import Start from './components/Main/Start';
-import Mine from './components/Main/Mine';
+import Login from './components/Login';
+import Start from './components/Start';
+import Mine from './components/Mine';
+import CardPackages from './components/CardPackages';
 
 const store = createStore(
   reducer,
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/start" component={Start}/>
           <Route path="/mine" component={Mine}/>
+          <Route path="/cardpackages" component={CardPackages}/>
           
         </Switch>
       </Router>
