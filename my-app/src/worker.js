@@ -23,7 +23,7 @@ export const calculateBlock = (prevhash, timestamp, data, nonce, diff) => {
         return;
       }
       if(i%100000 == 0){
-        postMessage([nonce, timestamp])
+        postMessage([nonce, hash])
       }
       i+=1;
       nonce+=1;
