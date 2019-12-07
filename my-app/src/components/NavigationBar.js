@@ -39,11 +39,6 @@ class NavigationBar extends Component{
                 <Navbar color="primary" light expand="sm">
                     <Row className="ml-auto">
                         <Nav  navbar>
-                            <Col xs="auto"> 
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} exact to="/start">PokeCoin</NavLink>
-                                </NavItem>
-                            </Col>
                             <Col xs="auto">
                                 <NavItem>
                                     <NavLink tag={RRNavLink} exact to="/mine">Farm</NavLink>
@@ -54,25 +49,46 @@ class NavigationBar extends Component{
                                     <NavLink tag={RRNavLink} exact to="/cardpackages">CardPackages</NavLink>
                                 </NavItem>
                             </Col>
+
                             <Col xs="auto">
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} exact to="/mycards">My Cards</NavLink>
-                                </NavItem>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Cards
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                        <NavLink tag={RRNavLink} exact to="/mycards">My Cards</NavLink>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                        <NavLink tag={RRNavLink} exact to="/allcards">AllCards</NavLink>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                             </Col>
+
                             <Col xs="auto">
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} exact to="/allcards">AllCards</NavLink>
-                                </NavItem>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Stuff
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                            <a className="text-muted" href="https://rocky-lowlands-35145.herokuapp.com/views/users" target="_blank">Users</a>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <a className="text-muted" href="https://rocky-lowlands-35145.herokuapp.com/views/blockchain" target="_blank">Blockchains</a>
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            <NavLink className="text-muted" onClick={this.props.logout}>Logout</NavLink>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                             </Col>
                             <Col xs="auto" >
                                 <NavItem>
                                     <NavLink><Balance/></NavLink>
                                     </NavItem>
-                            </Col>
-                            <Col xs="auto">
-                                <NavItem>
-                                <Button outline color="dark" onClick={this.props.logout}>Logout</Button>
-                                </NavItem>
                             </Col>
                         </Nav>
                     </Row>  
