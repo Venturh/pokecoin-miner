@@ -41,7 +41,6 @@ function mine(addBlockBody){
 function getBalance(){
     return dispatch => {
         walletApi.walletBalanceGet().then(function(response){
-            console.log("succes", response.amount)
             dispatch(getBalance_succes(response.amount))
         }).catch(function(error){
             console.log("error",error)

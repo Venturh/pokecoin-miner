@@ -19,6 +19,8 @@ import Start from './components/Start';
 import Mine from './components/Mine';
 import AllCards from './components/AllCards';
 import Packages from './components/Packages';
+import Mining from './components/Mining';
+import UserCards from './components/UserCards';
 
 const store = createStore(
   reducer,
@@ -34,9 +36,10 @@ function App() {
         <Switch>
           <Route path="/login" component={Login}/>
           <Route path="/start" component={Start}/>
-          <Route path="/mine" component={Mine}/>
+          <Route path="/mine" component={Mining}/>
           <Route path="/allcards" component={AllCards}/>
           <Route path="/cardpackages" component={Packages}/>
+          <Route path="/mycards" component={UserCards}/>
           <Route path="/" component={Login}/>
           
         </Switch>

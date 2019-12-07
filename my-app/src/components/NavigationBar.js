@@ -56,6 +56,11 @@ class NavigationBar extends Component{
                             </Col>
                             <Col xs="auto">
                                 <NavItem>
+                                    <NavLink tag={RRNavLink} exact to="/mycards">My Cards</NavLink>
+                                </NavItem>
+                            </Col>
+                            <Col xs="auto">
+                                <NavItem>
                                     <NavLink tag={RRNavLink} exact to="/allcards">AllCards</NavLink>
                                 </NavItem>
                             </Col>

@@ -34,6 +34,7 @@ class Mine extends Component{
         this.mine = this.mine.bind(this);
         this.stopMine = this.stopMine.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.timer = setInterval(() => this.fetchPrev(), 20000);
         this.checkActiveTab = this.checkActiveTab.bind(this);
         document.addEventListener('visibilitychange', this.checkActiveTab);
     }
@@ -53,6 +54,13 @@ class Mine extends Component{
     handleChange(e) {
         const { value } = e.target;
         this.setState({ data: value });
+    }
+
+    fetchPrev(){
+        this.blockchainApi.blockchainLastBlockGet().then(function(response){
+            this.setState({ prevHash: response.hash });
+            console.log("lastblock")
+        })
     }
 
     sendBlock(timestamp, data){
@@ -77,7 +85,7 @@ class Mine extends Component{
             }.bind(this))
             .then(function(){
                 console.log("worker")
-                this.workerInstance.calculateBlock(this.state.prevHash, this.state.timestamp, this.state.data, this.state.nonce, this.state.difficulty)
+                this.workerInstance.calculateBlock(this.state.prevHash, Math.floor(Date.now() / 1000), this.state.data, 0, this.state.difficulty)
             }.bind(this))
         }.bind(this))
 
@@ -86,11 +94,12 @@ class Mine extends Component{
         this.workerInstance.addEventListener('message', (message) => {
             if(message.data.type != "RPC"){
                 if(message.data.length == 2){
-                    console.log('New Message: ', message.data)
+                    console.log('New Message 2: ', message.data)
                     this.setState({ nonce: message.data[0], timestamp: message.data[1]});
                 } else {
-                    console.log('New Message: ', message.data)
+                    console.log('New Message else: ', message.data)
                     this.sendBlock(message.data[0], message.data[1]);
+                    //this.mine();
                 }
 
             } else {
@@ -137,6 +146,7 @@ class Mine extends Component{
                         {this.props.blockchain.blockfound && <p>You found a PokeCoin! Press mine again</p>}
                     </div>
                 </Form>
+                <Button color="primary" size="lg" block onClick={()=>this.workerInstance.postMessage("Hello World")}>PostMessage</Button>
                 </div>
             </div>
         )
