@@ -98,8 +98,8 @@ class NavigationBar extends Component{
     }
 }
 function mapState(state) {
-    const {  } = state;
-    return {  };
+    const { user } = state;
+    return { user };
   }
   
   const actionCreators = {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
 
 import { CardsApi, UsersApi } from '../server';
 import { cookies } from '../constants/Cookie';
 import NavigationBar from './NavigationBar';
-import UserCarde from './UserCard';
+import UserCard from './Card';
+import Loading from './Loading';
 
 
 
@@ -26,7 +26,6 @@ class UserCards extends Component{
 
     componentDidMount() {
         this.cardsApi.cardsUsercardsGet().then((response)=>{
-            console.log("response", response)
             this.setState({ cards: response})
             for (let index = 0; index < response.length; index++) {
                 let double = false;
@@ -52,11 +51,10 @@ class UserCards extends Component{
               return(
                   <div>
                     <NavigationBar/>
-                    <p>Loading...</p>
+                    <Loading/>
                   </div>
               )
           } else {
-            console.log(this.state.fullcards)
               return(
                 <div>
                 <NavigationBar/>
@@ -66,7 +64,7 @@ class UserCards extends Component{
                             {this.state.fullcards.map(item =>(
                                 
                                 <Col xs="auto" key={item.card.id}>
-                                <UserCarde key={item.card.id}
+                                <UserCard key={item.card.id}
                                     imageurl={item.card.imageUrl} 
                                     imageUrlHiRes={item.card.imageUrlHiRes} 
                                     name={item.card.name}
