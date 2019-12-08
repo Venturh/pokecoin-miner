@@ -17,7 +17,7 @@ function login(username, password) {
       cookies.set('token', response.token, { path: '/' });
       dispatch(login_request(null));
       dispatch(login_success(username, response.token));
-      history.push("/start");
+      history.push("/mine");
     })
     .catch(function(error){
       console.log("Eroor ", error);
