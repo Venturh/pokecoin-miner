@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-    Button,
-    Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
     Nav,
     NavItem,
@@ -15,7 +12,6 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
     Row,
     Col,
   } from 'reactstrap';
@@ -35,24 +31,29 @@ class NavigationBar extends Component{
 
     render(){
         return(
-            <div>
+            <div >
                 <Navbar color="primary" light expand="sm">
+                   <Row>
+                       <Col xs="auto">
+                           <NavbarBrand  className="text-white">PokeCoin</NavbarBrand >
+                       </Col>
+                   </Row>
                     <Row className="ml-auto">
-                        <Nav  navbar>
+                        <Nav navbar>
                             <Col xs="auto">
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} exact to="/mine">Farm</NavLink>
+                                    <NavLink className="text-white" tag={RRNavLink} exact to="/mine">Farm</NavLink>
                                 </NavItem>
                             </Col>
                             <Col xs="auto">
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} exact to="/cardpackages">CardPackages</NavLink>
+                                    <NavLink className="text-white" tag={RRNavLink} exact to="/cardpackages">CardPackages</NavLink>
                                 </NavItem>
                             </Col>
 
                             <Col xs="auto">
                                 <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret>
+                                    <DropdownToggle className="text-white" nav caret>
                                         Cards
                                     </DropdownToggle>
                                     <DropdownMenu right>
@@ -68,7 +69,7 @@ class NavigationBar extends Component{
 
                             <Col xs="auto">
                                 <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret>
+                                    <DropdownToggle className="text-white" nav caret>
                                         Stuff
                                     </DropdownToggle>
                                     <DropdownMenu right>

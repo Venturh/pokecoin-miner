@@ -34,7 +34,7 @@ class AllCards extends Component{
   loadCards(pagenr){
     this.setState({loading: true})
     this.cardsApi.cardsGet({page: pagenr}).then((response) => {
-      //console.log("Cards", response.cards)
+      console.log("Cards", response.cards)
       this.setState({ cards: response.cards, loading: false });
     })
   }

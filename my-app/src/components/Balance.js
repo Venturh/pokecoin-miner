@@ -43,7 +43,7 @@ class Balance extends Component{
 
       render() {
         return (
-          <div >
+          <div className="text-white">
             Coins:  <Badge color="info">{this.props.wallet.balance }</Badge>
           </div>
 
