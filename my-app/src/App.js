@@ -36,10 +36,9 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/mine" component={Mining}/>
           <Route exact path="/allcards" component={AllCards}/>
-          <Route path="/allcards/:cardID" component={DetailCard}/>
           <Route path="/cardpackages" component={Packages}/>
           <Route exact path="/mycards/" component={UserCards}/>
-          <Route path="/mycards/:cardID" component={DetailCard}/>
+          <Route path="/cards/:cardID" component={DetailCard}/>
           <Route path="/" component={Login}/>
           
         </Switch>
