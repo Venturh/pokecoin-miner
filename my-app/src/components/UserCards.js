@@ -38,15 +38,16 @@ class UserCards extends Component{
                         }
 
                     });
-                    if (double == false)
-                        this.setState({ fullcards: [...this.state.fullcards, response] })
-                        this.state.fullcards.sort((a, b) => (a.card.supertype > b.card.supertype) ? 1 : -1)
-                        this.setState({loading: false})
+                    if (double == false){
+                        this.setState({ fullcards: [...this.state.fullcards, response,] })
+                        //this.state.fullcards.sort((a, b) => (a.card.supertype > b.card.supertype) ? 1 : -1)
+                    }   
                 })
             } 
-            
+            this.setState({loading: false})
         })
-  }
+    }
+
 
       render() {
           if(this.state.fullcards.length == 0){

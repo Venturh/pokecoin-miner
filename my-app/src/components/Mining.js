@@ -138,7 +138,7 @@ class Mining extends Component{
                          <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
                             Mine
                             </Button>
-                        <Button color="primary" size="lg" block onClick={this.stopMine}>Stop</Button>
+                        {this.state.mining && <Button color="primary" size="lg" block onClick={this.stopMine}>Stop</Button>}
                     </FormGroup>
                 </Form>
             </div>
