@@ -16,7 +16,6 @@ import {
     Col,
   } from 'reactstrap';
 import { userActions } from '../actions/UserAction';
-import { blockchainActions } from '../actions/BlockchainAction';
 import Balance from './Balance';
 
 class NavigationBar extends Component{
@@ -105,8 +104,6 @@ function mapState(state) {
   
   const actionCreators = {
     logout: userActions.logout,
-    stopMine: blockchainActions.stop,
-    
   };
   
   export default connect(mapState, actionCreators

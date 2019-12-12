@@ -6,6 +6,7 @@ import { Container, Card, CardImg,
 
 import { UsersApi, CardsApi } from '../server';
 import { cookies } from '../constants/Cookie';
+import { balanceAction } from '../actions/BalanceAction';
 import UserCard from './Card';
 
 
@@ -30,6 +31,7 @@ class Pack extends Component{
       this.cardsApi.cardsPackagesCardPackNameBuyDefaultPackageGet(name).then((response) => {
         this.setState({success: true, cards: response.cards})
         console.log(this.state.cards, this.state.success);
+        
       })
     }
 
@@ -37,6 +39,7 @@ class Pack extends Component{
       this.setState({ success: false});
       this.setState({ success: true});
       console.log("Gekauft", this.state.cards, this.state.success);
+      this.props.getBalance();
 
 
     }
@@ -51,7 +54,7 @@ class Pack extends Component{
                     <CardImg top src={this.props.imageurl ? this.props.imageurl:"https://i.ebayimg.com/images/g/gsYAAOSwt9FdQogP/s-l1600.png"}  alt="https://i.ebayimg.com/images/g/gsYAAOSwt9FdQogP/s-l1600.png" />
                     <Container className="text-center">
                       <CardTitle><h1>{this.props.name}</h1></CardTitle>
-                      <Button color="primary" size="lg" onClick={()=>this.buyPackage(this.props.name)}>Buy</Button>
+                      <Button color="primary" size="lg" onClick={()=>this.buytest()}>Buy</Button>
                     </Container>
                 </Card>
                 <Container>
@@ -82,6 +85,14 @@ class Pack extends Component{
       }
 }
 
+function mapState(state) {
+  const { wallet } = state;
+  return { wallet  };
+}
 
+const actionCreators = {
+  getBalance: balanceAction.getBalance
 
-export default Pack;
+};
+
+export default connect(mapState, actionCreators)(Pack);

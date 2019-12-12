@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Badge } from 'reactstrap';
 
-import { blockchainActions } from '../actions/BlockchainAction';
+import { balanceAction } from '../actions/BalanceAction';
 import { UsersApi } from '../server';
 import { cookies } from '../constants/Cookie';
 
@@ -57,7 +57,7 @@ function mapState(state) {
 }
 
 const actionCreators = {
-  getBalance: blockchainActions.getBalance
+  getBalance: balanceAction.getBalance
 
 };
 

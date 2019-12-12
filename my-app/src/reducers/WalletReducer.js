@@ -1,9 +1,6 @@
-import { blockchainConstants } from "../constants/BlockchainConstants";
-
-
 export function wallet(state = {}, action){
     switch(action.type){
-        case blockchainConstants.GETBALANCE_SUCCES:
+        case "GETBALANCE_SUCCES":
             return{
                 balance: action.balance,
             }
