@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody, Button, Container, Row, Col } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardHeader, CardSubtitle, CardBody, Button, Container, Row, Col } from 'reactstrap';
 import NavigationBar from './NavigationBar';
 
 
@@ -11,36 +11,28 @@ import NavigationBar from './NavigationBar';
 class DetailCard extends Component{
     constructor(props){
         super(props);
-
         this.state = {
         };
-
     }
 
-    componentDidMount() {
-  }
-
   render() {
-      console.log("props",this.props)
     return (
-      <div>
+      <Container>
           <NavigationBar/>
           <Container className="d-flex justify-content-center">
-          <Row>
+            <Row>
               <Col xs="auto">
-            <CardImg src={this.props.location.image} alt="Card image cap" />
-            <CardBody className="display-1 text-center">
-                <CardTitle>{this.props.location.name}</CardTitle>
-                <CardSubtitle>{this.props.location.set} Pack</CardSubtitle>
-            </CardBody>
-            </Col>
-        </Row>
-
+                <Card style={{ width: '18rem'}}>
+                  <CardHeader >{this.props.location.name}</CardHeader>  
+                  <CardImg src={this.props.location.image} alt="Card image cap" />
+                  <CardBody className="text-center">
+                      <CardSubtitle>{this.props.location.set} Pack</CardSubtitle>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
           </Container>
-
-
-      </div>
-
+      </Container>
     );
   }
 }

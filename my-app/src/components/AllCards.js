@@ -76,7 +76,7 @@ class AllCards extends Component{
                   </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationLink last href="#" />
+                  <PaginationLink last onClick={()=>this.loadCards(2)} />
                 </PaginationItem>
               </Pagination>
             <Row>

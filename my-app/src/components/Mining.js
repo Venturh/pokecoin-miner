@@ -47,6 +47,7 @@ class Mining extends Component{
 
     componentWillUnmount() {
         this.workerInstance.terminate();
+        clearInterval(this.timer)
 
     }
 

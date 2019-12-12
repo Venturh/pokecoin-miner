@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 
 import { CardsApi, UsersApi } from '../server';
 import { cookies } from '../constants/Cookie';
@@ -40,12 +40,27 @@ class UserCards extends Component{
                     });
                     if (double == false){
                         this.setState({ fullcards: [...this.state.fullcards, response,] })
-                        //this.state.fullcards.sort((a, b) => (a.card.supertype > b.card.supertype) ? 1 : -1)
                     }   
                 })
             } 
             this.setState({loading: false})
         })
+    }
+
+    sortBy(type){
+        this.setState({loading: true})
+        switch (type) {
+            case "supertype":
+                this.state.fullcards.sort((a, b) => (a.card.supertype > b.card.supertype) ? 1 : -1)
+                break;
+            case "name":
+                this.state.fullcards.sort((a, b) => (a.card.name > b.card.name) ? 1 : -1)
+                break;
+        
+            default:
+                break;
+        }
+        this.setState({loading: false})
     }
 
 
@@ -63,6 +78,15 @@ class UserCards extends Component{
                 <NavigationBar/>
                     <Container >
                         <h1>Your Cards</h1>
+                        <Row>
+                            <Col xs="auto">
+                                <Button onClick={()=>this.sortBy("supertype")}>Sort by supertype</Button>
+                            </Col>
+                            <Col xs="auto">
+                                <Button onClick={()=>this.sortBy("name")}>Sort by name</Button>
+                            </Col>
+                        </Row>
+
                         <Row>
                             {this.state.fullcards.map(item =>(
                                 

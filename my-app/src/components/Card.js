@@ -18,7 +18,7 @@ class UserCard extends Component{
       render() {
         const location = {
           pathname: "/cards/" + this.props.cardId,
-          image: this.props.imageurl,
+          image: this.props.imageUrlHiRes,
           name: this.props.name,
           set: this.props.set
       }

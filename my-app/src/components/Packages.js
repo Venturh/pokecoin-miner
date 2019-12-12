@@ -42,11 +42,11 @@ class Packages extends Component{
                 <Container >
                     <h1>Packages</h1>
                     <Row>
-                    {this.state.packages.map(item =>(
-                    <Col xs="auto" key={item}>
-                    <Pack key={item.id} name={item}/>
-                    </Col>
-                ))}
+                        {this.state.packages.map(item =>(
+                        <Col xs="auto" key={item}>
+                            <Pack key={item.id} name={item}/>
+                        </Col>
+                        ))}
 
                     </Row>
                 </Container>
