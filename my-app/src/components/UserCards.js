@@ -56,7 +56,6 @@ class UserCards extends Component{
             case "name":
                 this.state.fullcards.sort((a, b) => (a.card.name > b.card.name) ? 1 : -1)
                 break;
-        
             default:
                 break;
         }
@@ -77,13 +76,15 @@ class UserCards extends Component{
                 <div>
                 <NavigationBar/>
                     <Container >
-                        <h1>Your Cards</h1>
+                        <h1>Your cards</h1>
+                        <span>Amount: {this.state.cards.length} | Without doubles: {this.state.fullcards.length}</span>
                         <Row>
-                            <Col xs="auto">
-                                <Button onClick={()=>this.sortBy("supertype")}>Sort by supertype</Button>
+                            <Col xs="3">
+                                <Button block onClick={()=>this.sortBy("supertype")}>Sort by supertype</Button>
                             </Col>
-                            <Col xs="auto">
-                                <Button onClick={()=>this.sortBy("name")}>Sort by name</Button>
+                            <Col xs="3">
+                                <Button block onClick={()=>this.sortBy("name")}>Sort by name</Button>
+                                <p></p>
                             </Col>
                         </Row>
 
@@ -96,7 +97,9 @@ class UserCards extends Component{
                                     imageUrlHiRes={item.card.imageUrlHiRes} 
                                     name={item.card.name}
                                     cardId={item.card.id}
-                                    set={item.card.set}/>
+                                    set={item.card.set}
+                                    link={true}/>
+                                    <p>#{item.card.nationalPokedexNumber}</p>
                                 
                                 </Col>
                             ))}

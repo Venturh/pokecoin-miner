@@ -34,7 +34,6 @@ class AllCards extends Component{
   loadCards(pagenr){
     this.setState({loading: true})
     this.cardsApi.cardsGet({page: pagenr}).then((response) => {
-      console.log("Cards", response.cards)
       this.setState({ cards: response.cards});
     }).then(()=>{
       this.setState({ loading: false});
@@ -87,7 +86,8 @@ class AllCards extends Component{
                                     imageUrlHiRes={item.imageUrlHiRes} 
                                     name={item.name}
                                     cardId={item.id}
-                                    set={item.set}/>
+                                    set={item.set}
+                                    link={true}/>
                     </Col>
                 ))}
             </Row>

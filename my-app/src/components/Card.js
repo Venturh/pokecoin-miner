@@ -18,19 +18,20 @@ class UserCard extends Component{
       render() {
         const location = {
           pathname: "/cards/" + this.props.cardId,
-          image: this.props.imageUrlHiRes,
-          name: this.props.name,
-          set: this.props.set
       }
         return (
           <div >
-            <Link to={location}>
+            { this.props.link ? <Link to={location}>
               <Card>
                   <CardImg top height="10%" width="10%" src={this.props.imageurl} alt="Card image cap" />
               </Card>
             </Link>
-
-          </div>
+            :
+            <Card>
+              <CardImg top height="10%" width="10%" src={this.props.imageurl} alt="Card image cap" />
+            </Card>
+          }
+        </div>
 
         );
       }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {Button, Spinner } from 'reactstrap';
+import {Spinner } from 'reactstrap';
 
 
 
