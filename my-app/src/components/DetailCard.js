@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, CardImg, CardTitle, CardHeader, CardSubtitle, CardBody, Button, Container, Row, Col, CardText } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardHeader, Container, Row, Col } from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import { CardsApi } from '../server';
 import Loading from './Loading';
-
-
-
-
-
 
 class DetailCard extends Component{
     constructor(props){
@@ -31,20 +26,20 @@ class DetailCard extends Component{
   render() {
     if(this.state.loading){
       return(
-        <Container>
+        <div>
           <NavigationBar/>
           <Loading/>
-        </Container>
+        </div>
       )
     } else {
       return (
-        <Container>
+        <div>
             <NavigationBar/>
             <Container className="d-flex justify-content-center">
               <Row>
                 <Col xs="auto">
-                  <Card style={{ width: '20em', height: '20em'}}>
-                    <CardImg src={this.state.card.imageUrlHiRes} alt="Card image cap" />
+                  <Card style={{ width: '15em', height: '20em'}}>
+                    <CardImg src={this.state.card.imageUrl} alt="Card image cap" />
                   </Card>
                 </Col>
                 <Col xs="auto">
@@ -67,7 +62,7 @@ class DetailCard extends Component{
                 </Col>
               </Row>
             </Container>
-        </Container>
+        </div>
       );
     }
   }

@@ -14,11 +14,6 @@ import { userActions } from '../actions/UserAction';
 class Balance extends Component{
     constructor(props){
         super(props);
-
-        this.state = {
-          
-
-        };
         this.usersAPI = new UsersApi();
         this.usersAPI.apiClient.authentications.token.apiKey = cookies.get('token');
 

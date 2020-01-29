@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { CardsApi } from '../server';
-
 import NavigationBar from './NavigationBar';
 import UserCard from './Card';
 import Loading from './Loading';
@@ -19,16 +17,11 @@ class AllCards extends Component{
           cards : [],
           loading : false,
         };
-        this.cardsApi = new CardsApi();
-
-
-        
+        this.cardsApi = new CardsApi(); 
     }
 
     componentDidMount() {
       this.loadCards(0)
-
-
   }
 
   loadCards(pagenr){

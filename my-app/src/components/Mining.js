@@ -42,18 +42,16 @@ class Mining extends Component{
     componentDidMount(){
         this.timer = setInterval(() => this.fetch(), 20000);
         this.fetch();
-
     }
 
     componentWillUnmount() {
         this.workerInstance.terminate();
         clearInterval(this.timer)
-
     }
 
     checkActiveTab(){
         if (document.visibilityState === 'hidden') {
-            //this.stopMine();
+            this.stopMine();
           }
     }
 
@@ -65,7 +63,6 @@ class Mining extends Component{
     fetch(){
         this.blockchainApi.blockchainLastBlockGet().then((response) =>{
             if(this.state.mining == true && response.hash != this.state.prevHash){
-                console.log("Neuer Hash von wem anderen:",response.hash, "Alter hash", this.state.prevHash)
                 this.workerInstance.terminate();
                 this.setState({ prevHash: response.hash });
                 this.mine();
@@ -103,11 +100,9 @@ class Mining extends Component{
                     document.title = "Gefarmte Coins: " + this.state.coins
                 default:
                 console.log("Defaulktmessage", message.data)
-                
             }
         })
     }
-
 
     stopMine(){
         this.setState({ mining: false});
@@ -115,13 +110,9 @@ class Mining extends Component{
         this.workerInstance.terminate();
     }
 
-
     render(){
         let data = this.state.data;
         let mining = this.state.mining;
-
-        
-        
         return(
             <div>
                 <NavigationBar/>
@@ -143,13 +134,12 @@ class Mining extends Component{
                     </FormGroup>
                 </Form>
             </div>
-                <div  className="text-center">
-                    {[...Array(this.state.coins)].map((e, i) =>  <img style={{width: 50}} key={i} src="https://img.icons8.com/color/48/000000/pokecoin.png" className="img-fluid" alt="Responsive image"/>)}
-                </div>
+            <div  className="text-center">
+                {[...Array(this.state.coins)].map((e, i) =>  <img style={{width: 50}} key={i} src="https://img.icons8.com/color/48/000000/pokecoin.png" className="img-fluid" alt="Responsive image"/>)}
+            </div>
             </div>
         )
     }
 }
 
-  
-  export default (Mining);
+export default (Mining);

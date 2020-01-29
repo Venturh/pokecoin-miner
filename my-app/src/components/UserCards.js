@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button } from 'reactstrap';
-
 import { CardsApi, UsersApi } from '../server';
 import { cookies } from '../constants/Cookie';
 import NavigationBar from './NavigationBar';
 import UserCard from './Card';
 import Loading from './Loading';
-
-
-
 
 class UserCards extends Component{
     constructor(props){
@@ -108,8 +104,6 @@ class UserCards extends Component{
                     </Container>
               </div>
               )
-              
-
           }
       }
 }

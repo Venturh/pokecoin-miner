@@ -22,10 +22,6 @@ class NavigationBar extends Component{
 
     constructor(props){
         super(props);
-
-        this.state = {
-
-        };
     }
 
     render(){
@@ -34,7 +30,7 @@ class NavigationBar extends Component{
                 <Navbar color="primary" light expand="sm">
                    <Row>
                        <Col xs="auto">
-                           <NavbarBrand  className="text-white">PokeCoin</NavbarBrand >
+                           <NavbarBrand  className="text-white"  tag={RRNavLink} exact to="/mine">PokeCoin</NavbarBrand >
                        </Col>
                    </Row>
                     <Row className="ml-auto">

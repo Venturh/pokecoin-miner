@@ -3,25 +3,17 @@ import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
 import { CardsApi } from '../server';
-
 import NavigationBar from './NavigationBar';
 import Pack from './Pack';
-
-
-
 
 class Packages extends Component{
     constructor(props){
         super(props);
-
         this.state = {
             packages: [],
           
         };
-        this.cardsApi = new CardsApi();
-
-
-        
+        this.cardsApi = new CardsApi();   
     }
 
     componentDidMount() {
@@ -29,11 +21,8 @@ class Packages extends Component{
         console.log("Packages", response)
         this.setState({ packages: response });
         console.log("State Cards", this.state.packages)
-
       })
-
   }
-
 
       render() {
         return (
@@ -47,7 +36,6 @@ class Packages extends Component{
                             <Pack key={item.id} name={item}/>
                         </Col>
                         ))}
-
                     </Row>
                 </Container>
           </div>
