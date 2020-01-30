@@ -1,4 +1,4 @@
-import { BlockchainApi, WalletApi } from "../server";
+import { WalletApi } from "../server";
 
 const walletApi = new WalletApi();
 

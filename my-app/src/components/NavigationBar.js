@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,11 +19,6 @@ import { userActions } from '../actions/UserAction';
 import Balance from './Balance';
 
 class NavigationBar extends Component{
-
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return(
             <div >

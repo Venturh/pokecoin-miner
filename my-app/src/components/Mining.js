@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button, Form, FormGroup, Label, Input, Alert, Spinner  } from 'reactstrap';
-
-
-
+import { Button, Form, FormGroup, Label, Input, Spinner } from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import { BlockchainApi, AddBlockBody, UsersApi } from '../server';
 import { cookies } from '../constants/Cookie';
-
 import worker from 'workerize-loader!../worker'; // eslint-disable-line import/no-webpack-loader-syntax
 
 
@@ -62,7 +57,7 @@ class Mining extends Component{
 
     fetch(){
         this.blockchainApi.blockchainLastBlockGet().then((response) =>{
-            if(this.state.mining == true && response.hash != this.state.prevHash){
+            if(this.state.mining === true && response.hash !== this.state.prevHash){
                 this.workerInstance.terminate();
                 this.setState({ prevHash: response.hash });
                 this.mine();
@@ -98,6 +93,7 @@ class Mining extends Component{
                     })
                     this.setState({ coins: this.state.coins+=1 });
                     document.title = "Gefarmte Coins: " + this.state.coins
+                    break;
                 default:
                 console.log("Defaulktmessage", message.data)
             }

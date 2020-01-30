@@ -34,13 +34,17 @@ class UserCards extends Component{
                         }
 
                     });
-                    if (double == false){
+                    if (double === false){
                         this.setState({ fullcards: [...this.state.fullcards, response,] })
                     }   
                 })
             } 
             this.setState({loading: false})
         })
+    }
+
+    removeDuplicates(toCheck){
+        
     }
 
     sortBy(type){
@@ -60,7 +64,7 @@ class UserCards extends Component{
 
 
       render() {
-          if(this.state.fullcards.length == 0){
+          if(this.state.fullcards.length === 0){
               return(
                   <div>
                     <NavigationBar/>
@@ -94,8 +98,7 @@ class UserCards extends Component{
                                     name={item.card.name}
                                     cardId={item.card.id}
                                     set={item.card.set}
-                                    link={true}/>
-                                    <p>#{item.card.nationalPokedexNumber}</p>
+                                    link={true}/> //Link um Karte Klickbar zu machen
                                 
                                 </Col>
                             ))}

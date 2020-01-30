@@ -9,7 +9,6 @@ import { userActions } from '../actions/UserAction';
 class Login extends Component{
     constructor(props){
         super(props);
-
         this.state = {
             username: '',
             password: '',

@@ -9,11 +9,6 @@ import {Spinner } from 'reactstrap';
 
 
 class Loading extends Component{
-    constructor(props){
-        super(props);
-    }
-
-
       render() {
         return (
           <div className="d-flex justify-content-center">
