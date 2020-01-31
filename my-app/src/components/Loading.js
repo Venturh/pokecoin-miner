@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import {Spinner } from 'reactstrap';
-
-
-
-
-
 
 class Loading extends Component{
       render() {

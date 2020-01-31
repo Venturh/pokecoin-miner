@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, Spinner } from 'reactstrap';
 import NavigationBar from './NavigationBar';
 import { BlockchainApi, AddBlockBody, UsersApi } from '../server';
+import { balanceAction } from '../actions/BalanceAction';
 import { cookies } from '../constants/Cookie';
 import worker from 'workerize-loader!../worker'; // eslint-disable-line import/no-webpack-loader-syntax
 
@@ -57,17 +59,16 @@ class Mining extends Component{
 
     fetch(){
         this.blockchainApi.blockchainLastBlockGet().then((response) =>{
+            //Falls neuer Block von einem anderen User gefunden wurde
             if(this.state.mining === true && response.hash !== this.state.prevHash){
                 this.workerInstance.terminate();
                 this.setState({ prevHash: response.hash });
                 this.mine();
             }
             this.setState({ prevHash: response.hash });
-            //console.log("lastblock", this.state.prevHash)
         }).then(() =>{
             this.blockchainApi.blockchainCurrentDifficultyGet().then((diff) => {
                 this.setState({ difficulty: diff }); 
-                //console.log("diff", this.state.difficulty)
             })
         })
     }
@@ -92,6 +93,7 @@ class Mining extends Component{
                         console.log(response)
                     })
                     this.setState({ coins: this.state.coins+=1 });
+                    this.props.getBalance()
                     document.title = "Gefarmte Coins: " + this.state.coins
                     break;
                 default:
@@ -114,28 +116,38 @@ class Mining extends Component{
                 <NavigationBar/>
                 <h1 className="display-3 text-center ">Start Mining</h1>
                 <div className="d-flex justify-content-center">
-                <Form >
-                    <FormGroup>
-                        <Label>Your Lucky Word:</Label>
-                        <Input  value={data} onChange={this.handleChange}></Input>
-                    </FormGroup>
+                    <Form >
+                        <FormGroup>
+                            <Label>Your Lucky Word:</Label>
+                            <Input  value={data} onChange={this.handleChange}></Input>
+                        </FormGroup>
 
-                    <FormGroup>
-                        <Button color="primary" size="lg" block onClick={this.mine}>
-                        {mining &&
-                         <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
-                            Mine
-                            </Button>
-                        {this.state.mining && <Button color="primary" size="lg" block onClick={this.stopMine}>Stop</Button>}
-                    </FormGroup>
-                </Form>
-            </div>
-            <div  className="text-center">
-                {[...Array(this.state.coins)].map((e, i) =>  <img style={{width: 50}} key={i} src="https://img.icons8.com/color/48/000000/pokecoin.png" className="img-fluid" alt="Responsive image"/>)}
-            </div>
+                        <FormGroup>
+                            <Button color="primary" size="lg" block onClick={this.mine}>
+                            {mining &&
+                            <Spinner className="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"/>}
+                                Mine
+                                </Button>
+                            {this.state.mining && <Button color="primary" size="lg" block onClick={this.stopMine}>Stop</Button>}
+                        </FormGroup>
+                    </Form>
+                </div>
+                <div  className="text-center">
+                    {[...Array(this.state.coins)].map((e, i) =>  <img style={{width: 50}} key={i} src="https://img.icons8.com/color/48/000000/pokecoin.png" className="img-fluid" alt="Responsive image"/>)}
+                </div>
             </div>
         )
     }
 }
 
-export default (Mining);
+function mapState(state) {
+    const { wallet } = state;
+    return { wallet  };
+  }
+  
+const actionCreators = {
+getBalance: balanceAction.getBalance
+  
+  };
+  
+  export default connect(mapState, actionCreators)(Mining);

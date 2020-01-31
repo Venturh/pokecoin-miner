@@ -21,21 +21,8 @@ class Balance extends Component{
     }
 
     componentDidMount() {
-      this.fetchUsers();
-      this.timer = setInterval(() => this.fetchUsers(), 20000);
-  }
-
-    componentWillUnmount() {
-      clearInterval(this.timer);
-      this.timer = null;
-  }
-
-
-
-    fetchUsers(){
       this.props.getBalance();
-    }
-
+  }
       render() {
         return (
           <div className="text-white">

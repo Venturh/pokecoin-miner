@@ -10,7 +10,8 @@ class UserCard extends Component{
       }
         return (
           <div >
-            { this.props.link ? <Link to={location}>
+            { this.props.link ? 
+            <Link to={location}>
               <Card>
                   <CardImg top height="10%" width="10%" src={this.props.imageurl} alt="Card image cap" />
               </Card>

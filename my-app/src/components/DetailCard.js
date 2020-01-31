@@ -17,9 +17,7 @@ class DetailCard extends Component{
 
   componentDidMount(){
     this.cardsApi.cardsCardIdGet(this.props.match.params.cardID).then((response)=>{
-      console.log("r", response.card)
       this.setState({card: response.card, loading:false})
-
     })
   }
 

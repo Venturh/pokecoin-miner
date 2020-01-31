@@ -12,9 +12,7 @@ class UserCards extends Component{
         super(props);
 
         this.state = {
-            cards: [],
             fullcards:[],
-            loading: true
         };
         this.usersAPI = new UsersApi();
         this.usersAPI.apiClient.authentications.token.apiKey = cookies.get('token');
@@ -23,32 +21,18 @@ class UserCards extends Component{
 
     componentDidMount() {
         this.cardsApi.cardsUsercardsGet().then((response)=>{
-            this.setState({ cards: response})
-            for (let index = 0; index < response.length; index++) {
-                let double = false;
-                const element = response[index];
+            response = response.filter((v,i,a)=>a.findIndex(t=>(t.cardId===v.cardId))===i)
+            response.forEach(element => {
                 this.cardsApi.cardsCardIdGet(element.cardId).then((response)=>{
-                    this.state.fullcards.forEach(e => {
-                        if(e.card.id === element.cardId){
-                            double = true;
-                        }
-
-                    });
-                    if (double === false){
-                        this.setState({ fullcards: [...this.state.fullcards, response,] })
-                    }   
+                    this.setState({ fullcards: [...this.state.fullcards, response,] })
                 })
-            } 
-            this.setState({loading: false})
+
+
+            }); 
         })
     }
 
-    removeDuplicates(toCheck){
-        
-    }
-
     sortBy(type){
-        this.setState({loading: true})
         switch (type) {
             case "supertype":
                 this.state.fullcards.sort((a, b) => (a.card.supertype > b.card.supertype) ? 1 : -1)
@@ -59,7 +43,6 @@ class UserCards extends Component{
             default:
                 break;
         }
-        this.setState({loading: false})
     }
 
 
@@ -77,7 +60,6 @@ class UserCards extends Component{
                 <NavigationBar/>
                     <Container >
                         <h1>Your cards</h1>
-                        <span>Amount: {this.state.cards.length} | Without doubles: {this.state.fullcards.length}</span>
                         <Row>
                             <Col xs="3">
                                 <Button block onClick={()=>this.sortBy("supertype")}>Sort by supertype</Button>
@@ -98,7 +80,7 @@ class UserCards extends Component{
                                     name={item.card.name}
                                     cardId={item.card.id}
                                     set={item.card.set}
-                                    link={true}/> //Link um Karte Klickbar zu machen
+                                    link={true}/>
                                 
                                 </Col>
                             ))}

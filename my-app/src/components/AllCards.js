@@ -12,7 +12,6 @@ import Loading from './Loading';
 class AllCards extends Component{
     constructor(props){
         super(props);
-
         this.state = {
           cards : [],
           loading : false,
@@ -34,53 +33,53 @@ class AllCards extends Component{
   }
 
 
-      render() {
-        if(this.state.loading){
-          return(
-          <div>
-            <NavigationBar/>
-            <Loading/>
-          </div>
-          )
-        } else {
-        return (
-          <div>
-            <NavigationBar/>
-          <Container >
-            <h1>All Cards</h1>
-            <Pagination aria-label="Page navigation example">
+  render() {
+    if(this.state.loading){
+      return(
+        <div>
+          <NavigationBar/>
+          <Loading/>
+        </div>
+        )
+    } else {
+      return (
+        <div>
+          <NavigationBar/>
+        <Container >
+          <h1>All Cards</h1>
+          <Pagination aria-label="Page navigation example">
+            <PaginationItem>
+                <PaginationLink first onClick={()=>this.loadCards(0)} />
+              </PaginationItem>
               <PaginationItem>
-                  <PaginationLink first onClick={()=>this.loadCards(0)} />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink onClick={()=>this.loadCards(0)}>
-                    1
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
+                <PaginationLink onClick={()=>this.loadCards(0)}>
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
                 <PaginationLink onClick={()=>this.loadCards(1)}>
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                <PaginationLink onClick={()=>this.loadCards(2)}>
-                    3
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink last onClick={()=>this.loadCards(2)} />
-                </PaginationItem>
-              </Pagination>
-            <Row>
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+              <PaginationLink onClick={()=>this.loadCards(2)}>
+                  3
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink last onClick={()=>this.loadCards(2)} />
+              </PaginationItem>
+            </Pagination>
+          <Row>
               {this.state.cards.map(item =>(
                     <Col xs="auto" key={item.id}>
-                                                    <UserCard key={item.id}
-                                    imageurl={item.imageUrl} 
-                                    imageUrlHiRes={item.imageUrlHiRes} 
-                                    name={item.name}
-                                    cardId={item.id}
-                                    set={item.set}
-                                    link={true}/>
+                      <UserCard key={item.id}
+                      imageurl={item.imageUrl} 
+                      imageUrlHiRes={item.imageUrlHiRes} 
+                      name={item.name}
+                      cardId={item.id}
+                      set={item.set}
+                      link={true}/>
                     </Col>
                 ))}
             </Row>

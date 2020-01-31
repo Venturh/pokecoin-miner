@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Card, CardImg,
     CardTitle, Button, Col, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
-
 import { UsersApi, CardsApi } from '../server';
 import { cookies } from '../constants/Cookie';
 import { balanceAction } from '../actions/BalanceAction';
 import UserCard from './Card';
-
-
 
 class Pack extends Component{
     constructor(props){

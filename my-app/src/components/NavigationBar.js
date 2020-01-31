@@ -60,7 +60,7 @@ class NavigationBar extends Component{
                             <Col xs="auto">
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle className="text-white" nav caret>
-                                        Stuff
+                                        User
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         <DropdownItem>
